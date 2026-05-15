@@ -1,26 +1,30 @@
-# react-native-app-design
+# claude-react-native-builder
 
-A Claude Code plugin for building and extending **production-grade React Native
-(Expo) mobile apps** that strictly follow one fixed architecture and one strict
-coding standard.
+> 🤖 A **Claude Code plugin** — an AI agent system that scaffolds and extends
+> production-grade **React Native (Expo)** mobile apps on a fixed, opinionated
+> architecture.
 
-It ships **one skill** and **four specialized agents**, wired together with a
-double-gated review loop so generated code is consistent, fully commented, and
+This is not a starter template and not a CLI. It is a [Claude
+Code](https://claude.com/claude-code) plugin: it ships **one skill** and **four
+specialized AI agents** that work together, under a self-reviewing build loop,
+to produce React Native code that is consistent, fully commented, and
 indistinguishable from hand-written reference code.
+
+---
 
 ## What it does
 
 - **Scaffolds** a new Expo app — the full 12-folder `src/` architecture, theme,
-  Redux store, RTK Query, navigation, auth shell, i18n, EAS config — ready for
-  features.
+  Redux store, RTK Query, navigation, auth shell, i18n, and EAS config — ready
+  for features.
 - **Extends** an existing app — adds screens, API services, Redux slices,
-  validation schemas, forms, hooks, and components, all following the standard.
+  validation schemas, forms, hooks, and components, each following the standard.
 - **Reviews** code against a strict, numbered ruleset (R01–R89).
-- **Builds & deploys** with EAS.
+- **Builds & deploys** with EAS Build, EAS Update, and EAS Submit.
 
 ## The locked stack
 
-Opinionated and fixed — the skill never asks you to pick libraries:
+Opinionated and fixed — the plugin never asks you to pick libraries:
 
 | Concern | Choice |
 | --- | --- |
@@ -33,7 +37,7 @@ Opinionated and fixed — the skill never asks you to pick libraries:
 | i18n | i18next + react-i18next |
 | Build / deploy | EAS Build + Update + Submit |
 
-## The agents
+## The four agents
 
 | Agent | Role |
 | --- | --- |
@@ -46,25 +50,40 @@ Opinionated and fixed — the skill never asks you to pick libraries:
 
 `rn-feature-builder` cannot write code until `rn-pattern-reviewer` has approved
 its **plan**, and cannot finish until the reviewer has approved its **code**.
-Failures loop back until they pass — block-and-loop-until-pass.
+Failures loop back until they pass — *block-and-loop-until-pass*.
 
 ## Installation
 
-This repo is a Claude Code plugin. Install it via the Claude Code plugin system
-by pointing at this repository, then the skill and agents become available in
-any session. Trigger it with `/react-native-app-design`, or just ask Claude to
-build or extend a React Native app.
+This repository is a Claude Code plugin. Add it through the Claude Code plugin
+system by pointing at this repo; the skill and agents then become available in
+any session.
 
-## Structure
+Once installed, trigger it with `/react-native-app-design`, or simply ask
+Claude to build or extend a React Native app.
+
+## How to use it
+
+| You want to… | Do this |
+| --- | --- |
+| Start a new app | `/react-native-app-design`, or "build me a new React Native app" |
+| Add a feature | "add a profile screen" / "add a notifications API service" |
+| Review code | "review this mobile code against the standard" |
+| Build / deploy | "build a preview with EAS" / "publish an OTA update" |
+
+## Repository structure
 
 ```
-.claude-plugin/plugin.json     Plugin manifest
+.claude-plugin/plugin.json          Plugin manifest
 skills/react-native-app-design/
-  SKILL.md                     Entry point — triggers, stack, orchestration
-  reference/                   Architecture, coding standards, patterns, …
-  templates/                   Skeletons for each file type
-agents/                        The four rn-* agents
+  SKILL.md                          Entry point — triggers, stack, orchestration
+  reference/                        Architecture, coding standards, patterns, …
+  templates/                        Skeletons for each file type
+agents/                             The four rn-* agents
 ```
+
+> The plugin/skill slug remains `react-native-app-design` (it is the command
+> name and is referenced internally); the repository is named
+> `claude-react-native-builder` for clarity.
 
 ## License
 
