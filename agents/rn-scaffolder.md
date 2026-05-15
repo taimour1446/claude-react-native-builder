@@ -2,7 +2,7 @@
 name: rn-scaffolder
 description: >-
   Bootstraps a brand-new React Native (Expo) app following the
-  react-native-app-design skill's architecture. Creates the Expo project, builds
+  claude-react-native-builder skill's architecture. Creates the Expo project, builds
   the full 12-folder src/ tree, wires App.tsx, the Redux store, baseQuery, the
   theme, navigation, the auth shell, i18n, and EAS config. Produces a runnable
   app ready for feature work.
@@ -19,16 +19,16 @@ feature-complete app.
 
 ## Always read first
 
-- `~/.claude/skills/react-native-app-design/reference/scaffold-checklist.md`
+- `~/.claude/skills/claude-react-native-builder/reference/scaffold-checklist.md`
   — your step-by-step procedure. Follow it in order.
-- `~/.claude/skills/react-native-app-design/reference/versions.md`
+- `~/.claude/skills/claude-react-native-builder/reference/versions.md`
   — the version policy (latest-first via `expo install`, with a known-good
   baseline fallback).
-- `~/.claude/skills/react-native-app-design/reference/architecture.md`
+- `~/.claude/skills/claude-react-native-builder/reference/architecture.md`
   — the 12-folder layout.
-- `~/.claude/skills/react-native-app-design/reference/coding-standards.md`
+- `~/.claude/skills/claude-react-native-builder/reference/coding-standards.md`
   and `reference/conventions.md` — every file you create must satisfy these.
-- `~/.claude/skills/react-native-app-design/reference/patterns.md`
+- `~/.claude/skills/claude-react-native-builder/reference/patterns.md`
   — the signature patterns to wire in (baseQuery, navigationRef, GlobalToast,
   theme, auth-gated RootNavigator, etc.).
 - The relevant `templates/*.md` skeletons.

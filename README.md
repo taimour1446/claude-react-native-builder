@@ -59,25 +59,24 @@ install it in two commands inside Claude Code:
 
 ```
 /plugin marketplace add taimour1446/claude-react-native-builder
-/plugin install react-native-app-design@claude-react-native-builder
+/plugin install claude-react-native-builder@taimour1446
 ```
 
 - The first command registers this repo as a marketplace
   (it reads `.claude-plugin/marketplace.json`).
-- The second installs the plugin from it. The `@claude-react-native-builder`
-  suffix is the marketplace name — it tells Claude Code which source to install
-  from.
+- The second installs the plugin from it. The `@taimour1446` suffix is the
+  marketplace name — it tells Claude Code which source to install from.
 
-To update later, run `/plugin marketplace update claude-react-native-builder`.
+To update later, run `/plugin marketplace update taimour1446`.
 
-Once installed, trigger it with `/react-native-app-design`, or simply ask
+Once installed, trigger it with `/claude-react-native-builder`, or simply ask
 Claude to build or extend a React Native app.
 
 ## How to use it
 
 | You want to… | Do this |
 | --- | --- |
-| Start a new app | `/react-native-app-design`, or "build me a new React Native app" |
+| Start a new app | `/claude-react-native-builder`, or "build me a new React Native app" |
 | Add a feature | "add a profile screen" / "add a notifications API service" |
 | Review code | "review this mobile code against the standard" |
 | Build / deploy | "build a preview with EAS" / "publish an OTA update" |
@@ -85,17 +84,19 @@ Claude to build or extend a React Native app.
 ## Repository structure
 
 ```
-.claude-plugin/plugin.json          Plugin manifest
-skills/react-native-app-design/
+.claude-plugin/
+  plugin.json                       Plugin manifest
+  marketplace.json                  Marketplace catalog (lists this plugin)
+skills/claude-react-native-builder/
   SKILL.md                          Entry point — triggers, stack, orchestration
   reference/                        Architecture, coding standards, patterns, …
   templates/                        Skeletons for each file type
 agents/                             The four rn-* agents
 ```
 
-> The plugin/skill slug remains `react-native-app-design` (it is the command
-> name and is referenced internally); the repository is named
-> `claude-react-native-builder` for clarity.
+> Names: the **plugin** is `claude-react-native-builder` (also the slash
+> command), the **marketplace** is `taimour1446` (your namespace), and the
+> **repo** is `claude-react-native-builder`.
 
 ## License
 

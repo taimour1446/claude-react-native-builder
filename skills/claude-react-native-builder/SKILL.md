@@ -1,5 +1,5 @@
 ---
-name: react-native-app-design
+name: claude-react-native-builder
 description: >-
   Build and extend production-grade React Native (Expo) mobile apps that strictly
   follow a fixed architecture and coding standard. Use whenever the user asks to

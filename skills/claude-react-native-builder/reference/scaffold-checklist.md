@@ -232,7 +232,7 @@ StatusBar + AppContent > NavigationContainer(ref) > RootNavigator + GlobalToast`
 
 Write a `CLAUDE.md` at the project root recording: the stack + versions, the
 12-folder architecture, the signature patterns, the commands, and the rule that
-this project is built with the `react-native-app-design` skill — so future
+this project is built with the `claude-react-native-builder` skill — so future
 sessions stay consistent.
 
 ## Step 16 — Verify

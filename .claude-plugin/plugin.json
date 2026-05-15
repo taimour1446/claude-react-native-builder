@@ -1,5 +1,5 @@
 {
-  "name": "react-native-app-design",
+  "name": "claude-react-native-builder",
   "version": "1.0.0",
   "description": "Build and extend production-grade React Native (Expo) mobile apps that strictly follow a fixed architecture and coding standard. Ships one skill and four specialized agents with a double-gated review loop.",
   "author": {
