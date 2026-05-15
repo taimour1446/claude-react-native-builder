@@ -54,9 +54,21 @@ Failures loop back until they pass — *block-and-loop-until-pass*.
 
 ## Installation
 
-This repository is a Claude Code plugin. Add it through the Claude Code plugin
-system by pointing at this repo; the skill and agents then become available in
-any session.
+This repository is both a Claude Code **plugin** and its own **marketplace** —
+install it in two commands inside Claude Code:
+
+```
+/plugin marketplace add taimour1446/claude-react-native-builder
+/plugin install react-native-app-design@claude-react-native-builder
+```
+
+- The first command registers this repo as a marketplace
+  (it reads `.claude-plugin/marketplace.json`).
+- The second installs the plugin from it. The `@claude-react-native-builder`
+  suffix is the marketplace name — it tells Claude Code which source to install
+  from.
+
+To update later, run `/plugin marketplace update claude-react-native-builder`.
 
 Once installed, trigger it with `/react-native-app-design`, or simply ask
 Claude to build or extend a React Native app.

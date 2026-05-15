@@ -1,0 +1,21 @@
+{
+  "name": "claude-react-native-builder",
+  "owner": {
+    "name": "TAIMOUR KHAN"
+  },
+  "metadata": {
+    "description": "Marketplace for the react-native-app-design Claude Code plugin — an AI agent system for building production-grade React Native (Expo) apps.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "react-native-app-design",
+      "source": "./",
+      "description": "Scaffolds and extends production-grade React Native (Expo) apps on a fixed architecture. Ships one skill and four specialized agents with a double-gated review loop.",
+      "version": "1.0.0",
+      "author": {
+        "name": "TAIMOUR KHAN"
+      }
+    }
+  ]
+}
