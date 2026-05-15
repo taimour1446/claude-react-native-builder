@@ -228,20 +228,32 @@ StatusBar + AppContent > NavigationContainer(ref) > RootNavigator + GlobalToast`
   (with the `EXPO_TOKEN` secret) → `npm ci` → `eas update --auto --branch
   <channel>` → PR comment. (See `conventions.md` §16.)
 
+## Step 14b — E2E testing setup (Maestro)
+
+- Create a `.maestro/` directory at the project root for E2E flow files.
+- Add a starter flow `.maestro/auth.yaml` that launches the app and asserts the
+  login screen renders (per `templates/maestro-flow.yaml.md`).
+- Maestro is a separate CLI (not an npm dependency) — note in the project
+  `CLAUDE.md` that contributors install it with
+  `curl -fsSL "https://get.maestro.mobile.dev" | bash`.
+- See `reference/testing.md` for the full conventions.
+
 ## Step 15 — Project `CLAUDE.md`
 
 Write a `CLAUDE.md` at the project root recording: the stack + versions, the
-12-folder architecture, the signature patterns, the commands, and the rule that
-this project is built with the `claude-react-native-builder` skill — so future
-sessions stay consistent.
+12-folder architecture, the signature patterns, the commands, the E2E testing
+setup (Maestro + `.maestro/`), and the rule that this project is built with the
+`claude-react-native-builder` skill — so future sessions stay consistent.
 
 ## Step 16 — Verify
 
 - `npx tsc --noEmit` — zero type errors.
 - `npx expo-doctor` — resolve every issue.
 - `npx expo start` — confirm the app boots to the login screen.
-- Hand the project to `rn-pattern-reviewer` for a full standards audit before
-  reporting the scaffold complete.
+- Hand the project to `rn-pattern-reviewer` for a full standards audit.
+- Hand the project to `rn-runner` to build + launch it and run the starter
+  Maestro flow (on macOS for iOS; otherwise Android), before reporting the
+  scaffold complete. If no simulator/emulator is available, report that.
 
 ---
 
@@ -250,5 +262,7 @@ sessions stay consistent.
 - The app runs and shows the login screen.
 - All 12 folders exist and are wired.
 - `tsc --noEmit` and `expo-doctor` are clean.
+- A `.maestro/` directory with a starter flow exists.
 - `rn-pattern-reviewer` returns PASS on the scaffolded shell.
+- `rn-runner` confirms the app builds and launches (where a run target exists).
 - A project `CLAUDE.md` exists.

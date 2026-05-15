@@ -5,7 +5,7 @@
 > architecture.
 
 This is not a starter template and not a CLI. It is a [Claude
-Code](https://claude.com/claude-code) plugin: it ships **one skill** and **four
+Code](https://claude.com/claude-code) plugin: it ships **one skill** and **five
 specialized AI agents** that work together, under a self-reviewing build loop,
 to produce React Native code that is consistent, fully commented, and
 indistinguishable from hand-written reference code.
@@ -36,14 +36,16 @@ Opinionated and fixed — the plugin never asks you to pick libraries:
 | Styling | `StyleSheet` + a context-based theme |
 | i18n | i18next + react-i18next |
 | Build / deploy | EAS Build + Update + Submit |
+| E2E testing | Maestro (YAML flows) |
 
-## The four agents
+## The five agents
 
 | Agent | Role |
 | --- | --- |
 | `rn-scaffolder` | Bootstraps a new app |
 | `rn-feature-builder` | Builds features — gated by the reviewer on both ends |
 | `rn-pattern-reviewer` | Strict standards gate (read-only) |
+| `rn-runner` | Builds, launches & E2E-tests the app on a simulator/emulator |
 | `rn-build-deployer` | EAS builds, OTA updates, store submission |
 
 ## The double review gate
@@ -91,7 +93,7 @@ skills/claude-react-native-builder/
   SKILL.md                          Entry point — triggers, stack, orchestration
   reference/                        Architecture, coding standards, patterns, …
   templates/                        Skeletons for each file type
-agents/                             The four rn-* agents
+agents/                             The five rn-* agents
 ```
 
 > Names: the **plugin** is `claude-react-native-builder` (also the slash

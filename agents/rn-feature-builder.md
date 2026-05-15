@@ -77,6 +77,11 @@ Implement the approved plan exactly. While writing:
 - Keep the change surgical — do not refactor adjacent code.
 - After writing, run `npx tsc --noEmit` and fix any type errors yourself.
 
+Also write a **Maestro E2E flow** for the feature under `.maestro/<feature>.yaml`,
+following `templates/maestro-flow.yaml.md` and `reference/testing.md`. The flow
+launches the app, reaches the feature, exercises its main path, and asserts the
+feature's success condition. This flow is part of the feature — not optional.
+
 If you are unsure of a current library API, use the `context7` tools to fetch
 up-to-date docs rather than guessing.
 
@@ -88,6 +93,19 @@ Hand the written files back to the orchestrator for the **POST-CHECK** by
 - If the reviewer returns FAIL, fix EVERY finding — and ONLY those findings, no
   unrelated changes — then resubmit. Repeat until PASS.
 - You are not done until the reviewer returns PASS on the code.
+
+### Step 4 — Run & test (via rn-runner)
+
+After the post-check PASSES, the orchestrator delegates to `rn-runner` to build
+and launch the app and run the feature's Maestro flow.
+
+- If `rn-runner` reports a build failure, a crash, console errors, or a failed
+  flow, fix the feature — and ONLY what the report identifies — then the work
+  goes back through the POST-CHECK and the run again.
+- You may not adjust a Maestro flow to mask a real feature defect. If the
+  feature is wrong, fix the feature.
+- The feature is done only when review PASSES and `rn-runner` reports it runs
+  and the flow passes (or the user accepts a no-simulator limitation).
 
 ## Output
 

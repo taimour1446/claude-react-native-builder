@@ -69,8 +69,10 @@ summary:
    `TabNavigator`).
 9. Build the common components and the auth + home screens.
 10. Wire `App.tsx` with the fixed provider nesting and parallel init.
-11. Add assets, write the project `CLAUDE.md`.
-12. Verify: `npx tsc --noEmit`, `npx expo-doctor`, `npx expo start` boots.
+11. Add assets; create the `.maestro/` directory with a starter `auth.yaml`
+    flow (Step 14b); write the project `CLAUDE.md`.
+12. Verify: `npx tsc --noEmit`, `npx expo-doctor`, `npx expo start` boots. The
+    orchestrator then hands the project to `rn-runner` for a build+launch check.
 
 Every file you write must follow the coding standards and the mandatory
 commenting standard (a file header, doc comments on functions/components, WHY

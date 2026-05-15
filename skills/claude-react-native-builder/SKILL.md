@@ -56,6 +56,7 @@ These choices are FINAL. Never substitute a library, never ask the user to pick.
 | Notifications | expo-notifications |
 | OTA updates | expo-updates |
 | Build / deploy | EAS Build + EAS Update + EAS Submit |
+| E2E testing | Maestro (YAML flows) |
 | Indentation | 4 spaces, everywhere |
 
 For exact version policy (latest-first with a known-good fallback), read
@@ -77,9 +78,10 @@ Read the relevant file(s) before doing the matching work:
 | `reference/data-patterns.md` | FlatList config, pagination, paginated slices, RTK Query cache tags / transformResponse / merge / idempotency. Read for any list or data work |
 | `reference/lifecycle-hooks.md` | Non-form custom hooks — notifications, OTA updates, polling, focus-refetch, device data |
 | `reference/utils-and-types.md` | The `src/utils/` catalog and the `src/types/` conventions |
+| `reference/testing.md` | Running the app on a simulator/emulator and Maestro E2E flows. Read for any run/test work |
 | `reference/versions.md` | Version policy and the known-good baseline |
 | `reference/scaffold-checklist.md` | The exact ordered steps + file manifest for a new app |
-| `templates/*.md` | The skeleton for the file type being created (component, screen, list-screen, api-service, slice, validation-schema, form-hooks, constants, types, lifecycle-hook) |
+| `templates/*.md` | The skeleton for the file type being created (component, screen, list-screen, api-service, slice, validation-schema, form-hooks, constants, types, lifecycle-hook, maestro-flow) |
 
 `reference/coding-standards.md` and `reference/conventions.md` are mandatory
 reading for every code-producing task. `coding-standards.md` is the single source
@@ -91,15 +93,16 @@ For list/data work also read `data-patterns.md`; for non-form hooks read
 
 ## The agents
 
-This skill delegates real work to four specialized subagents. The skill itself is
+This skill delegates real work to five specialized subagents. The skill itself is
 the **orchestrator** (the planner): it interprets the request, picks the agent,
 and enforces the review loop. Delegate via the Agent tool.
 
 | Agent | Role | Use it to… |
 | --- | --- | --- |
 | `rn-scaffolder` | Executor | Bootstrap a brand-new app: create the Expo project, build the 12-folder `src/`, wire `App.tsx`, the store, `baseQuery`, the theme, navigation, the auth shell, configure `app.config.ts` / `eas.json` / i18n |
-| `rn-feature-builder` | Executor | Build or change a feature — a vertical slice spanning screen + API service + slice + validation + form-hooks + components |
+| `rn-feature-builder` | Executor | Build or change a feature — a vertical slice spanning screen + API service + slice + validation + form-hooks + components, plus a Maestro flow for it |
 | `rn-pattern-reviewer` | Reviewer (read-only) | Validate a PLAN or written CODE against `reference/coding-standards.md`. Emits PASS or FAIL with specific findings |
+| `rn-runner` | Verifier | Build and launch the app on a simulator/emulator, capture logs, detect crashes, run Maestro E2E flows, capture screenshots, report pass/fail |
 | `rn-build-deployer` | Lifecycle | Run EAS — builds, OTA updates, credentials, store submission |
 
 ---
@@ -146,15 +149,27 @@ This is the core flow. The reviewer gates the work on **both** ends.
    - FAIL → return findings to `rn-feature-builder`, get a revised plan, re-check.
    - PASS → continue.
 4. `rn-feature-builder` writes the actual code, with full comments per the
-   mandatory commenting standard.
+   mandatory commenting standard, AND a Maestro E2E flow for the feature under
+   `.maestro/`.
 5. **POST-CHECK.** Pass the written code to **`rn-pattern-reviewer`** with the
    question: "Does this code follow the standards?"
    - FAIL → return findings to `rn-feature-builder` to fix, then re-check.
-   - PASS → done.
-6. Report what was built and confirm both gates passed.
+   - PASS → continue.
+6. **RUN & TEST.** Delegate to **`rn-runner`**: build and launch the app, confirm
+   it runs with no crash/console errors, run the feature's Maestro flow, capture
+   screenshots.
+   - If the build fails, the app crashes, or the flow fails → return the report
+     to `rn-feature-builder` to fix the feature, then re-run from the POST-CHECK.
+   - If no simulator/emulator is available, `rn-runner` says so; the feature is
+     reported as code-verified-only and the user decides.
+7. Report what was built, confirm both review gates passed, and give the
+   `rn-runner` result (build/launch/flow + screenshot paths). State plainly that
+   visual review is the user's.
 
 `rn-feature-builder` must NOT write final code until the reviewer has PASSED its
-plan. It must NOT be reported as done until the reviewer has PASSED its code.
+plan. The feature is not "done" until the reviewer has PASSED its code AND
+`rn-runner` reports the app runs and the flow passes (or the user accepts a
+no-simulator limitation).
 
 ### Flow C — Review existing code
 
@@ -166,6 +181,14 @@ findings. If the user wants the findings fixed, run them through
 
 Delegate to **`rn-build-deployer`**. It handles EAS builds, OTA updates,
 credentials, and submission guidance.
+
+### Flow E — Run or test the app
+
+Delegate to **`rn-runner`** to build and launch the app on a simulator/emulator,
+detect crashes, and run Maestro E2E flows. Use for "run the app", "test the
+login feature", "does it build". `rn-runner` verifies behaviour, not appearance
+— it reports screenshot paths for the user's visual review. See
+`reference/testing.md`.
 
 ---
 
