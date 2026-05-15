@@ -1,0 +1,20 @@
+{
+  "name": "react-native-app-design",
+  "version": "1.0.0",
+  "description": "Build and extend production-grade React Native (Expo) mobile apps that strictly follow a fixed architecture and coding standard. Ships one skill and four specialized agents with a double-gated review loop.",
+  "author": {
+    "name": "taimour1446"
+  },
+  "homepage": "https://github.com/taimour1446/react-native-app-design",
+  "repository": "https://github.com/taimour1446/react-native-app-design",
+  "license": "MIT",
+  "keywords": [
+    "react-native",
+    "expo",
+    "mobile",
+    "redux-toolkit",
+    "rtk-query",
+    "scaffolding",
+    "code-review"
+  ]
+}
